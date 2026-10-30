@@ -15,7 +15,10 @@ final class PermissionManager: ObservableObject {
 
     func refresh() {
         screenRecordingGranted = CGPreflightScreenCaptureAccess()
-        accessibilityGranted = AXIsProcessTrusted()
+        let options = [
+            kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: false
+        ] as CFDictionary
+        accessibilityGranted = AXIsProcessTrustedWithOptions(options)
     }
 
     func requestScreenRecordingAccess() {

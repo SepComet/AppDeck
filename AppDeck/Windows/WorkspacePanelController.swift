@@ -39,10 +39,14 @@ final class WorkspacePanelController {
     func show() {
         guard let screen = NSScreen.main ?? NSScreen.screens.first else { return }
         panel.setFrame(screen.visibleFrame, display: true)
-        permissions.refresh()
+        refreshPermissions()
         NSApp.activate(ignoringOtherApps: true)
         panel.makeKeyAndOrderFront(nil)
         viewModel.start()
+    }
+
+    func refreshPermissions() {
+        permissions.refresh()
     }
 
     func hide() {

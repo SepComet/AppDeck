@@ -24,6 +24,8 @@
 	<string>public.app-category.utilities</string>
 	<key>NSHighResolutionCapable</key>
 	<true/>
+	<key>NSAccessibilityUsageDescription</key>
+	<string>AppDeck 需要辅助功能权限，以便精确提升目标应用窗口。</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 </dict>

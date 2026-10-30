@@ -16,6 +16,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
 
+    func applicationDidBecomeActive(_ notification: Notification) {
+        panelController?.refreshPermissions()
+    }
+
     func applicationWillTerminate(_ notification: Notification) {
         panelController.terminate()
     }

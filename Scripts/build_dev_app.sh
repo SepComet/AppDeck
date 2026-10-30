@@ -25,6 +25,11 @@ swiftc \
 cp "$workspace_root/AppDeck/Resources/Info.plist" "$app_bundle/Contents/Info.plist"
 /usr/libexec/PlistBuddy -c "Set :CFBundleExecutable AppDeck" "$app_bundle/Contents/Info.plist"
 /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier com.wmx.AppDeck" "$app_bundle/Contents/Info.plist"
-/usr/bin/codesign --force --deep --sign - "$app_bundle" >/dev/null
+signing_identity="${APPDECK_CODESIGN_IDENTITY:-AppDeck Local Development}"
+if security find-certificate -a -c "$signing_identity" "$HOME/Library/Keychains/login.keychain-db" >/dev/null 2>&1; then
+    /usr/bin/codesign --force --deep --sign "$signing_identity" "$app_bundle" >/dev/null
+else
+    /usr/bin/codesign --force --deep --sign - "$app_bundle" >/dev/null
+fi
 
 echo "$app_bundle"
