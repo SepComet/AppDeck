@@ -1,0 +1,215 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		C10000010000000000000001 = {isa = PBXContainerItemProxy; containerPortal = A80000010000000000000001; proxyType = 1; remoteGlobalIDString = A60000010000000000000001; remoteInfo = AppDeck; };
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXBuildFile section */
+		A10000010000000000000001 /* AppDeckApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000001 /* AppDeckApp.swift */; };
+		A10000010000000000000002 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000002 /* AppDelegate.swift */; };
+		A10000010000000000000003 /* AppEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000003 /* AppEntry.swift */; };
+		A10000010000000000000004 /* AppGroupStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000004 /* AppGroupStore.swift */; };
+		A10000010000000000000005 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000005 /* PermissionManager.swift */; };
+		A10000010000000000000006 /* RunningAppDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000006 /* RunningAppDiscovery.swift */; };
+		A10000010000000000000007 /* WindowDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000007 /* WindowDiscovery.swift */; };
+		A10000010000000000000008 /* WindowCaptureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000008 /* WindowCaptureService.swift */; };
+		A10000010000000000000009 /* WindowActivationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000009 /* WindowActivationService.swift */; };
+		A1000001000000000000000A /* PreviewGridViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000001000000000000000A /* PreviewGridViewModel.swift */; };
+		A1000001000000000000000B /* WorkspacePanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000001000000000000000B /* WorkspacePanel.swift */; };
+		A1000001000000000000000C /* WorkspacePanelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000001000000000000000C /* WorkspacePanelController.swift */; };
+		A1000001000000000000000D /* AppPreviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000001000000000000000D /* AppPreviewCard.swift */; };
+		A1000001000000000000000E /* PermissionGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000001000000000000000E /* PermissionGuideView.swift */; };
+		A1000001000000000000000F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000001000000000000000F /* SettingsView.swift */; };
+		A10000010000000000000010 /* WorkspacePanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000010 /* WorkspacePanelView.swift */; };
+		A10000010000000000000011 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A30000010000000000000001 /* AppKit.framework */; };
+		A10000010000000000000012 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A30000010000000000000002 /* SwiftUI.framework */; };
+		A10000010000000000000013 /* ScreenCaptureKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A30000010000000000000003 /* ScreenCaptureKit.framework */; };
+		A10000010000000000000014 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A30000010000000000000004 /* ApplicationServices.framework */; };
+		A10000010000000000000015 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A30000010000000000000005 /* CoreGraphics.framework */; };
+		A10000010000000000000016 /* AppDeck.app in Products */ = {isa = PBXBuildFile; fileRef = A20000020000000000000001 /* AppDeck.app */; };
+		B10000010000000000000001 /* AppGroupStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000010000000000000001 /* AppGroupStoreTests.swift */; };
+		B10000010000000000000002 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A30000010000000000000006 /* XCTest.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A20000010000000000000001 /* AppDeckApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDeckApp.swift; sourceTree = "<group>"; };
+		A20000010000000000000002 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A20000010000000000000003 /* AppEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEntry.swift; sourceTree = "<group>"; };
+		A20000010000000000000004 /* AppGroupStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroupStore.swift; sourceTree = "<group>"; };
+		A20000010000000000000005 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
+		A20000010000000000000006 /* RunningAppDiscovery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningAppDiscovery.swift; sourceTree = "<group>"; };
+		A20000010000000000000007 /* WindowDiscovery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowDiscovery.swift; sourceTree = "<group>"; };
+		A20000010000000000000008 /* WindowCaptureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowCaptureService.swift; sourceTree = "<group>"; };
+		A20000010000000000000009 /* WindowActivationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowActivationService.swift; sourceTree = "<group>"; };
+		A2000001000000000000000A /* PreviewGridViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewGridViewModel.swift; sourceTree = "<group>"; };
+		A2000001000000000000000B /* WorkspacePanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacePanel.swift; sourceTree = "<group>"; };
+		A2000001000000000000000C /* WorkspacePanelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacePanelController.swift; sourceTree = "<group>"; };
+		A2000001000000000000000D /* AppPreviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreviewCard.swift; sourceTree = "<group>"; };
+		A2000001000000000000000E /* PermissionGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionGuideView.swift; sourceTree = "<group>"; };
+		A2000001000000000000000F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A20000010000000000000010 /* WorkspacePanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacePanelView.swift; sourceTree = "<group>"; };
+		A20000010000000000000011 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A20000020000000000000001 /* AppDeck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppDeck.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A30000010000000000000001 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		A30000010000000000000002 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		A30000010000000000000003 /* ScreenCaptureKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScreenCaptureKit.framework; path = System/Library/Frameworks/ScreenCaptureKit.framework; sourceTree = SDKROOT; };
+		A30000010000000000000004 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
+		A30000010000000000000005 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A30000010000000000000006 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = System/Library/Frameworks/XCTest.framework; sourceTree = SDKROOT; };
+		B20000010000000000000001 /* AppGroupStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroupStoreTests.swift; sourceTree = "<group>"; };
+		B20000020000000000000001 /* AppDeckTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppDeckTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A40000010000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000010000000000000011 /* AppKit.framework in Frameworks */,
+				A10000010000000000000012 /* SwiftUI.framework in Frameworks */,
+				A10000010000000000000013 /* ScreenCaptureKit.framework in Frameworks */,
+				A10000010000000000000014 /* ApplicationServices.framework in Frameworks */,
+				A10000010000000000000015 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B40000010000000000000001 /* Test Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (B10000010000000000000002 /* XCTest.framework in Frameworks */);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A50000010000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				A50000010000000000000002 /* App */,
+				A50000010000000000000003 /* Models */,
+				A50000010000000000000004 /* Services */,
+				A50000010000000000000005 /* Views */,
+				A50000010000000000000006 /* Windows */,
+				A50000010000000000000007 /* Resources */,
+				B50000010000000000000001 /* AppDeckTests */,
+				A50000010000000000000008 /* Products */,
+			);
+			path = AppDeck;
+			sourceTree = "<group>";
+		};
+		A50000010000000000000002 /* App */ = {isa = PBXGroup; children = (A20000010000000000000001, A20000010000000000000002); path = App; sourceTree = "<group>"; };
+		A50000010000000000000003 /* Models */ = {isa = PBXGroup; children = (A20000010000000000000003); path = Models; sourceTree = "<group>"; };
+		A50000010000000000000004 /* Services */ = {isa = PBXGroup; children = (A20000010000000000000004, A20000010000000000000005, A20000010000000000000006, A20000010000000000000007, A20000010000000000000008, A20000010000000000000009, A2000001000000000000000A); path = Services; sourceTree = "<group>"; };
+		A50000010000000000000005 /* Views */ = {isa = PBXGroup; children = (A2000001000000000000000D, A2000001000000000000000E, A2000001000000000000000F, A20000010000000000000010); path = Views; sourceTree = "<group>"; };
+		A50000010000000000000006 /* Windows */ = {isa = PBXGroup; children = (A2000001000000000000000B, A2000001000000000000000C); path = Windows; sourceTree = "<group>"; };
+		A50000010000000000000007 /* Resources */ = {isa = PBXGroup; children = (A20000010000000000000011); path = Resources; sourceTree = "<group>"; };
+		A50000010000000000000008 /* Products */ = {isa = PBXGroup; children = (A20000020000000000000001, B20000020000000000000001); name = Products; sourceTree = "<group>"; };
+		B50000010000000000000001 /* AppDeckTests */ = {isa = PBXGroup; children = (B20000010000000000000001); path = AppDeckTests; sourceTree = SOURCE_ROOT; };
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A60000010000000000000001 /* AppDeck */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A70000010000000000000002 /* Build configuration list for PBXNativeTarget "AppDeck" */;
+			buildPhases = (A40000010000000000000002, A40000010000000000000001, A40000010000000000000003);
+			buildRules = ();
+			dependencies = ();
+			name = AppDeck;
+			productName = AppDeck;
+			productReference = A20000020000000000000001 /* AppDeck.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B60000010000000000000001 /* AppDeckTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B70000010000000000000001 /* Build configuration list for PBXNativeTarget "AppDeckTests" */;
+			buildPhases = (B40000010000000000000002, B40000010000000000000001, B40000010000000000000003);
+			buildRules = ();
+			dependencies = (C20000010000000000000001 /* AppDeck target dependency */);
+			name = AppDeckTests;
+			productName = AppDeckTests;
+			productReference = B20000020000000000000001 /* AppDeckTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXTargetDependency section */
+		C20000010000000000000001 /* AppDeck target dependency */ = {isa = PBXTargetDependency; target = A60000010000000000000001 /* AppDeck */; targetProxy = C10000010000000000000001; };
+/* End PBXTargetDependency section */
+
+/* Begin PBXProject section */
+		A80000010000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = { LastUpgradeCheck = 1600; ORGANIZATIONNAME = AppDeck; };
+			buildConfigurationList = A70000010000000000000001 /* Build configuration list for PBXProject "AppDeck" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (en, Base);
+			mainGroup = A50000010000000000000001;
+			productRefGroup = A50000010000000000000008 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (A60000010000000000000001 /* AppDeck */, B60000010000000000000001 /* AppDeckTests */);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A40000010000000000000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = ();
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B40000010000000000000003 /* Test Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A40000010000000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000010000000000000001 /* AppDeckApp.swift in Sources */,
+				A10000010000000000000002 /* AppDelegate.swift in Sources */,
+				A10000010000000000000003 /* AppEntry.swift in Sources */,
+				A10000010000000000000004 /* AppGroupStore.swift in Sources */,
+				A10000010000000000000005 /* PermissionManager.swift in Sources */,
+				A10000010000000000000006 /* RunningAppDiscovery.swift in Sources */,
+				A10000010000000000000007 /* WindowDiscovery.swift in Sources */,
+				A10000010000000000000008 /* WindowCaptureService.swift in Sources */,
+				A10000010000000000000009 /* WindowActivationService.swift in Sources */,
+				A1000001000000000000000A /* PreviewGridViewModel.swift in Sources */,
+				A1000001000000000000000B /* WorkspacePanel.swift in Sources */,
+				A1000001000000000000000C /* WorkspacePanelController.swift in Sources */,
+				A1000001000000000000000D /* AppPreviewCard.swift in Sources */,
+				A1000001000000000000000E /* PermissionGuideView.swift in Sources */,
+				A1000001000000000000000F /* SettingsView.swift in Sources */,
+				A10000010000000000000010 /* WorkspacePanelView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B40000010000000000000002 /* Test Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (B10000010000000000000001 /* AppGroupStoreTests.swift in Sources */); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A90000010000000000000001 /* Debug */ = {isa = XCBuildConfiguration; buildSettings = { ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; CODE_SIGN_IDENTITY = "-"; DEBUG_INFORMATION_FORMAT = dwarf; DEVELOPMENT_TEAM = ""; ENABLE_HARDENED_RUNTIME = YES; GCC_C_LANGUAGE_STANDARD = gnu17; MACOSX_DEPLOYMENT_TARGET = 14.0; ONLY_ACTIVE_ARCH = YES; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = macosx; SWIFT_OPTIMIZATION_LEVEL = "-Onone"; SWIFT_VERSION = 5.0; }; name = Debug; };
+		A90000010000000000000002 /* Release */ = {isa = XCBuildConfiguration; buildSettings = { ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; CODE_SIGN_IDENTITY = "-"; DEVELOPMENT_TEAM = ""; ENABLE_HARDENED_RUNTIME = YES; GCC_C_LANGUAGE_STANDARD = gnu17; MACOSX_DEPLOYMENT_TARGET = 14.0; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = macosx; SWIFT_OPTIMIZATION_LEVEL = "-O"; SWIFT_VERSION = 5.0; }; name = Release; };
+		A90000010000000000000003 /* Target Debug */ = {isa = XCBuildConfiguration; buildSettings = { CURRENT_PROJECT_VERSION = 1; ENABLE_TESTABILITY = YES; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = AppDeck/Resources/Info.plist; LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/../Frameworks"); PRODUCT_BUNDLE_IDENTIFIER = com.wmx.AppDeck; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_EMIT_LOC_STRINGS = YES; }; name = Debug; };
+		A90000010000000000000004 /* Target Release */ = {isa = XCBuildConfiguration; buildSettings = { CURRENT_PROJECT_VERSION = 1; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = AppDeck/Resources/Info.plist; LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/../Frameworks"); PRODUCT_BUNDLE_IDENTIFIER = com.wmx.AppDeck; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_EMIT_LOC_STRINGS = YES; }; name = Release; };
+		B90000010000000000000001 /* Test Debug */ = {isa = XCBuildConfiguration; buildSettings = { BUNDLE_LOADER = "$(TEST_HOST)"; GENERATE_INFOPLIST_FILE = YES; PRODUCT_BUNDLE_IDENTIFIER = com.wmx.AppDeckTests; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AppDeck.app/Contents/MacOS/AppDeck"; }; name = Debug; };
+		B90000010000000000000002 /* Test Release */ = {isa = XCBuildConfiguration; buildSettings = { BUNDLE_LOADER = "$(TEST_HOST)"; GENERATE_INFOPLIST_FILE = YES; PRODUCT_BUNDLE_IDENTIFIER = com.wmx.AppDeckTests; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AppDeck.app/Contents/MacOS/AppDeck"; }; name = Release; };
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A70000010000000000000001 /* Build configuration list for PBXProject "AppDeck" */ = {isa = XCConfigurationList; buildConfigurations = (A90000010000000000000001, A90000010000000000000002); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		A70000010000000000000002 /* Build configuration list for PBXNativeTarget "AppDeck" */ = {isa = XCConfigurationList; buildConfigurations = (A90000010000000000000003, A90000010000000000000004); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		B70000010000000000000001 /* Build configuration list for PBXNativeTarget "AppDeckTests" */ = {isa = XCConfigurationList; buildConfigurations = (B90000010000000000000001, B90000010000000000000002); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+/* End XCConfigurationList section */
+	};
+	rootObject = A80000010000000000000001 /* Project object */;
+}
