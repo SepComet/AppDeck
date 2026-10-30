@@ -13,6 +13,7 @@
 /* Begin PBXBuildFile section */
 		A10000010000000000000001 /* AppDeckApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000001 /* AppDeckApp.swift */; };
 		A10000010000000000000002 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000002 /* AppDelegate.swift */; };
+		A10000010000000000000018 /* GlobalShortcutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000018 /* GlobalShortcutController.swift */; };
 		A10000010000000000000003 /* AppEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000003 /* AppEntry.swift */; };
 		A10000010000000000000004 /* AppGroupStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000004 /* AppGroupStore.swift */; };
 		A10000010000000000000005 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000005 /* PermissionManager.swift */; };
@@ -27,6 +28,7 @@
 		A1000001000000000000000E /* PermissionGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000001000000000000000E /* PermissionGuideView.swift */; };
 		A1000001000000000000000F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000001000000000000000F /* SettingsView.swift */; };
 		A10000010000000000000010 /* WorkspacePanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000010 /* WorkspacePanelView.swift */; };
+		A10000010000000000000017 /* EdgeLauncherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000017 /* EdgeLauncherController.swift */; };
 		A10000010000000000000011 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A30000010000000000000001 /* AppKit.framework */; };
 		A10000010000000000000012 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A30000010000000000000002 /* SwiftUI.framework */; };
 		A10000010000000000000013 /* ScreenCaptureKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A30000010000000000000003 /* ScreenCaptureKit.framework */; };
@@ -40,6 +42,7 @@
 /* Begin PBXFileReference section */
 		A20000010000000000000001 /* AppDeckApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDeckApp.swift; sourceTree = "<group>"; };
 		A20000010000000000000002 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A20000010000000000000018 /* GlobalShortcutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalShortcutController.swift; sourceTree = "<group>"; };
 		A20000010000000000000003 /* AppEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEntry.swift; sourceTree = "<group>"; };
 		A20000010000000000000004 /* AppGroupStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroupStore.swift; sourceTree = "<group>"; };
 		A20000010000000000000005 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
@@ -54,6 +57,7 @@
 		A2000001000000000000000E /* PermissionGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionGuideView.swift; sourceTree = "<group>"; };
 		A2000001000000000000000F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A20000010000000000000010 /* WorkspacePanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacePanelView.swift; sourceTree = "<group>"; };
+		A20000010000000000000017 /* EdgeLauncherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeLauncherController.swift; sourceTree = "<group>"; };
 		A20000010000000000000011 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A20000020000000000000001 /* AppDeck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppDeck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A30000010000000000000001 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -103,11 +107,11 @@
 			path = AppDeck;
 			sourceTree = "<group>";
 		};
-		A50000010000000000000002 /* App */ = {isa = PBXGroup; children = (A20000010000000000000001, A20000010000000000000002); path = App; sourceTree = "<group>"; };
+		A50000010000000000000002 /* App */ = {isa = PBXGroup; children = (A20000010000000000000001, A20000010000000000000002, A20000010000000000000018); path = App; sourceTree = "<group>"; };
 		A50000010000000000000003 /* Models */ = {isa = PBXGroup; children = (A20000010000000000000003); path = Models; sourceTree = "<group>"; };
 		A50000010000000000000004 /* Services */ = {isa = PBXGroup; children = (A20000010000000000000004, A20000010000000000000005, A20000010000000000000006, A20000010000000000000007, A20000010000000000000008, A20000010000000000000009, A2000001000000000000000A); path = Services; sourceTree = "<group>"; };
 		A50000010000000000000005 /* Views */ = {isa = PBXGroup; children = (A2000001000000000000000D, A2000001000000000000000E, A2000001000000000000000F, A20000010000000000000010); path = Views; sourceTree = "<group>"; };
-		A50000010000000000000006 /* Windows */ = {isa = PBXGroup; children = (A2000001000000000000000B, A2000001000000000000000C); path = Windows; sourceTree = "<group>"; };
+		A50000010000000000000006 /* Windows */ = {isa = PBXGroup; children = (A2000001000000000000000B, A2000001000000000000000C, A20000010000000000000017); path = Windows; sourceTree = "<group>"; };
 		A50000010000000000000007 /* Resources */ = {isa = PBXGroup; children = (A20000010000000000000011); path = Resources; sourceTree = "<group>"; };
 		A50000010000000000000008 /* Products */ = {isa = PBXGroup; children = (A20000020000000000000001, B20000020000000000000001); name = Products; sourceTree = "<group>"; };
 		B50000010000000000000001 /* AppDeckTests */ = {isa = PBXGroup; children = (B20000010000000000000001); path = AppDeckTests; sourceTree = SOURCE_ROOT; };
@@ -176,6 +180,7 @@
 			files = (
 				A10000010000000000000001 /* AppDeckApp.swift in Sources */,
 				A10000010000000000000002 /* AppDelegate.swift in Sources */,
+				A10000010000000000000018 /* GlobalShortcutController.swift in Sources */,
 				A10000010000000000000003 /* AppEntry.swift in Sources */,
 				A10000010000000000000004 /* AppGroupStore.swift in Sources */,
 				A10000010000000000000005 /* PermissionManager.swift in Sources */,
@@ -190,6 +195,7 @@
 				A1000001000000000000000E /* PermissionGuideView.swift in Sources */,
 				A1000001000000000000000F /* SettingsView.swift in Sources */,
 				A10000010000000000000010 /* WorkspacePanelView.swift in Sources */,
+				A10000010000000000000017 /* EdgeLauncherController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

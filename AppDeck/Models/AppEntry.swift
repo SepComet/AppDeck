@@ -11,35 +11,80 @@ struct AppEntry: Codable, Equatable, Identifiable, Sendable {
 }
 
 enum AppLayout: String, Codable, CaseIterable, Identifiable, Sendable {
-    case twoByTwo
-    case twoByThree
+    case one
+    case two
+    case three
+    case four
+    case five
+    case six
+
+    // Compatibility aliases for the first persisted layout names.
+    static let twoByTwo = AppLayout.four
+    static let twoByThree = AppLayout.six
 
     var id: String { rawValue }
 
     var columns: Int {
         switch self {
-        case .twoByTwo:
+        case .one:
+            return 1
+        case .two:
             return 2
-        case .twoByThree:
+        case .three, .five, .six:
             return 3
+        case .four:
+            return 2
+        }
+    }
+
+    var rows: Int {
+        switch self {
+        case .one, .two, .three:
+            return 1
+        case .four, .five, .six:
+            return 2
         }
     }
 
     var capacity: Int {
         switch self {
-        case .twoByTwo:
-            return 4
-        case .twoByThree:
-            return 6
+        case .one: return 1
+        case .two: return 2
+        case .three: return 3
+        case .four: return 4
+        case .five: return 5
+        case .six: return 6
         }
     }
 
     var title: String {
-        switch self {
-        case .twoByTwo:
-            return "2 × 2"
-        case .twoByThree:
-            return "2 × 3"
+        "\(capacity) 个 · \(columns) × \(rows)"
+    }
+
+    static func forCount(_ count: Int) -> AppLayout {
+        switch max(1, min(count, 6)) {
+        case 1: return .one
+        case 2: return .two
+        case 3: return .three
+        case 4: return .four
+        case 5: return .five
+        default: return .six
+        }
+    }
+
+    init(from decoder: Decoder) throws {
+        let value = try decoder.singleValueContainer().decode(String.self)
+        switch value {
+        case "twoByTwo": self = .four
+        case "twoByThree": self = .six
+        default:
+            guard let layout = AppLayout(rawValue: value) else {
+                throw DecodingError.dataCorruptedError(
+                    in: try decoder.singleValueContainer(),
+                    debugDescription: "Unknown AppLayout: \(value)"
+                )
+            }
+            self = layout
         }
     }
 }

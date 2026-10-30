@@ -61,10 +61,56 @@ final class AppGroupStoreTests: XCTestCase {
     }
 
     func testLayoutCapacityAndColumns() {
-        XCTAssertEqual(AppLayout.twoByTwo.columns, 2)
-        XCTAssertEqual(AppLayout.twoByTwo.capacity, 4)
-        XCTAssertEqual(AppLayout.twoByThree.columns, 3)
-        XCTAssertEqual(AppLayout.twoByThree.capacity, 6)
+        let expected: [(AppLayout, Int, Int, Int)] = [
+            (.one, 1, 1, 1),
+            (.two, 2, 2, 1),
+            (.three, 3, 3, 1),
+            (.four, 4, 2, 2),
+            (.five, 5, 3, 2),
+            (.six, 6, 3, 2)
+        ]
+
+        for (layout, capacity, columns, rows) in expected {
+            XCTAssertEqual(layout.capacity, capacity)
+            XCTAssertEqual(layout.columns, columns)
+            XCTAssertEqual(layout.rows, rows)
+        }
+        XCTAssertEqual(AppLayout.twoByTwo, .four)
+        XCTAssertEqual(AppLayout.twoByThree, .six)
+    }
+
+    func testAddingApplicationMetadataFromRunningAppIsPersisted() throws {
+        let root = FileManager.default.temporaryDirectory
+            .appendingPathComponent("AppDeckTests-\(UUID().uuidString)", isDirectory: true)
+        defer { try? FileManager.default.removeItem(at: root) }
+
+        let store = AppGroupStore(fileURL: root.appendingPathComponent("apps.json"))
+        try store.addApplication(
+            bundleIdentifier: "com.example.RunningApp",
+            displayName: "Running App",
+            appPath: "/Applications/Running App.app"
+        )
+
+        XCTAssertEqual(store.entries.first?.displayName, "Running App")
+        XCTAssertEqual(store.entries.first?.appPath, "/Applications/Running App.app")
+        XCTAssertEqual(store.layout, .one)
+
+        let reloadedStore = AppGroupStore(fileURL: root.appendingPathComponent("apps.json"))
+        XCTAssertEqual(reloadedStore.entries, store.entries)
+    }
+
+    func testLegacyLayoutValuesDecodeToNewPresets() throws {
+        let root = FileManager.default.temporaryDirectory
+            .appendingPathComponent("AppDeckTests-\(UUID().uuidString)", isDirectory: true)
+        defer { try? FileManager.default.removeItem(at: root) }
+
+        let configuration = #"{"entries":[],"layout":"twoByThree"}"#.data(using: .utf8)!
+        let fileURL = root.appendingPathComponent("apps.json")
+        try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+        try configuration.write(to: fileURL)
+
+        let store = AppGroupStore(fileURL: fileURL)
+        XCTAssertEqual(store.layout, .six)
     }
 
     private func makeApplication(

@@ -23,7 +23,12 @@ final class WindowDiscovery {
             candidates[application.bundleIdentifier, default: []].append(window)
         }
 
-        return candidates.reduce(into: [:]) { result, pair in
+        let normalWindows = candidates.mapValues { windows in
+            let normalLayerWindows = windows.filter { $0.windowLayer == 0 }
+            return normalLayerWindows.isEmpty ? windows : normalLayerWindows
+        }
+
+        return normalWindows.reduce(into: [:]) { result, pair in
             result[pair.key] = pair.value.max {
                 ($0.frame.width * $0.frame.height) < ($1.frame.width * $1.frame.height)
             }

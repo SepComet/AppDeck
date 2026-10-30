@@ -7,15 +7,17 @@ struct SettingsView: View {
     @ObservedObject var permissions: PermissionManager
     @Environment(\.dismiss) private var dismiss
     @State private var errorMessage: String?
+    @State private var runningApps: [RunningAppCandidate] = []
+
+    private let runningAppDiscovery = RunningAppDiscovery()
 
     var body: some View {
-        let entries: [AppEntry] = store.entries
-        VStack(alignment: .leading, spacing: 18) {
+        VStack(alignment: .leading, spacing: 16) {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("应用管理")
                         .font(.title2.weight(.semibold))
-                    Text("最多添加 6 个应用，卡片顺序会同步到工作台。")
+                    Text("优先从当前正在运行的应用中选择，加入后才会显示在工作台。")
                         .foregroundStyle(.secondary)
                 }
                 Spacer()
@@ -23,38 +25,14 @@ struct SettingsView: View {
                     .keyboardShortcut(.defaultAction)
             }
 
-            List {
-                ForEach(entries, id: \.bundleIdentifier) { entry in
-                    SettingsAppRow(entry: entry) { store.remove(entry) }
-                }
-                .onMove(perform: store.move)
-            }
-            .frame(minHeight: 190)
-
-            HStack {
-                Button {
-                    addApplication()
-                } label: {
-                    Label("添加应用…", systemImage: "plus")
-                }
-                .buttonStyle(.borderedProminent)
-                .disabled(store.entries.count >= 6)
-
-                Spacer()
-
-                Picker("布局", selection: $store.layout) {
-                    ForEach(AppLayout.allCases) { layout in
-                        Text(layout.title).tag(layout)
-                    }
-                }
-                .pickerStyle(.segmented)
-                .frame(width: 170)
-            }
-
+            runningAppsSection
+            addedAppsSection
+            layoutSection
             PermissionGuideView(permissions: permissions)
         }
         .padding(24)
-        .frame(width: 700, height: 540)
+        .frame(width: 760, height: 720)
+        .onAppear(perform: refreshRunningApps)
         .alert("无法添加应用", isPresented: Binding(
             get: { errorMessage != nil },
             set: { if !$0 { errorMessage = nil } }
@@ -65,7 +43,129 @@ struct SettingsView: View {
         }
     }
 
-    private func addApplication() {
+    private var runningAppsSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("当前运行中的应用")
+                        .font(.headline)
+                    Text("点击添加后才会进入白名单，最多 6 个。")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                Spacer()
+                Button {
+                    refreshRunningApps()
+                } label: {
+                    Label("刷新", systemImage: "arrow.clockwise")
+                }
+                .buttonStyle(.borderless)
+            }
+
+            if runningApps.isEmpty {
+                Text("暂时没有可添加的运行中应用。")
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity, minHeight: 72)
+            } else {
+                List(runningApps) { candidate in
+                    RunningAppRow(
+                        candidate: candidate,
+                        isAdded: isAdded(candidate),
+                        isFull: store.entries.count >= 6,
+                        onAdd: { addRunningApplication(candidate) }
+                    )
+                }
+                .listStyle(.inset)
+                .frame(height: 170)
+            }
+        }
+    }
+
+    private var addedAppsSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Text("展示白名单")
+                    .font(.headline)
+                Spacer()
+                Button {
+                    addApplicationFromDisk()
+                } label: {
+                    Label("从文件选择…", systemImage: "folder")
+                }
+                .buttonStyle(.borderless)
+                .disabled(store.entries.count >= 6)
+            }
+
+            if store.entries.isEmpty {
+                Text("还没有加入应用。")
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity, minHeight: 60)
+            } else {
+                List {
+                    ForEach(store.entries) { entry in
+                        SettingsAppRow(entry: entry) { store.remove(entry) }
+                    }
+                    .onMove(perform: store.move)
+                }
+                .listStyle(.inset)
+                .frame(height: 150)
+            }
+        }
+    }
+
+    private var layoutSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Text("布局预设")
+                    .font(.headline)
+                Spacer()
+                Text("当前 \(store.entries.count) 个应用")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: 6), spacing: 8) {
+                ForEach(AppLayout.allCases) { layout in
+                    Button {
+                        store.setLayout(layout)
+                    } label: {
+                        VStack(spacing: 3) {
+                            Text("\(layout.capacity) 个")
+                                .font(.subheadline.weight(.semibold))
+                            Text("\(layout.columns) × \(layout.rows)")
+                                .font(.caption)
+                        }
+                        .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.bordered)
+                    .tint(store.layout == layout ? .accentColor : .secondary)
+                    .disabled(store.entries.count > layout.capacity)
+                }
+            }
+        }
+    }
+
+    private func refreshRunningApps() {
+        runningApps = runningAppDiscovery.candidates()
+    }
+
+    private func isAdded(_ candidate: RunningAppCandidate) -> Bool {
+        store.entries.contains { $0.bundleIdentifier == candidate.bundleIdentifier }
+    }
+
+    private func addRunningApplication(_ candidate: RunningAppCandidate) {
+        do {
+            try store.addApplication(
+                bundleIdentifier: candidate.bundleIdentifier,
+                displayName: candidate.displayName,
+                appPath: candidate.appPath
+            )
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
+    private func addApplicationFromDisk() {
         let panel = NSOpenPanel()
         panel.allowedContentTypes = [.application]
         panel.allowsMultipleSelection = false
@@ -78,6 +178,41 @@ struct SettingsView: View {
         } catch {
             errorMessage = error.localizedDescription
         }
+    }
+}
+
+private struct RunningAppRow: View {
+    let candidate: RunningAppCandidate
+    let isAdded: Bool
+    let isFull: Bool
+    let onAdd: () -> Void
+
+    var body: some View {
+        HStack(spacing: 10) {
+            Image(nsImage: NSWorkspace.shared.icon(forFile: candidate.appPath))
+                .resizable()
+                .frame(width: 28, height: 28)
+                .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
+            VStack(alignment: .leading, spacing: 2) {
+                HStack(spacing: 6) {
+                    Text(candidate.displayName)
+                    if candidate.isActive {
+                        Text("当前")
+                            .font(.caption2.weight(.semibold))
+                            .foregroundStyle(.tint)
+                    }
+                }
+                Text(candidate.appPath)
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
+            }
+            Spacer()
+            Button(isAdded ? "已添加" : "添加", action: onAdd)
+                .buttonStyle(.bordered)
+                .disabled(isAdded || isFull)
+        }
+        .padding(.vertical, 2)
     }
 }
 

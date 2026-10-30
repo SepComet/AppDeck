@@ -65,7 +65,11 @@ final class PreviewGridViewModel: ObservableObject {
 
         guard permissions.screenRecordingGranted else {
             previews = Dictionary(uniqueKeysWithValues: entries.map {
-                ($0.id, AppPreview(entry: $0, image: nil, status: .screenRecordingRequired))
+                ($0.id, AppPreview(
+                    entry: $0,
+                    image: previews[$0.id]?.image,
+                    status: .screenRecordingRequired
+                ))
             })
             return
         }
@@ -78,7 +82,7 @@ final class PreviewGridViewModel: ObservableObject {
             windows = try await windowDiscovery.representativeWindows(for: entries)
         } catch {
             previews = Dictionary(uniqueKeysWithValues: entries.map {
-                ($0.id, AppPreview(entry: $0, image: nil, status: .unavailable))
+                ($0.id, AppPreview(entry: $0, image: previews[$0.id]?.image, status: .unavailable))
             })
             return
         }
@@ -86,7 +90,11 @@ final class PreviewGridViewModel: ObservableObject {
         for entry in entries {
             guard !Task.isCancelled else { return }
             guard let window = windows[entry.id] else {
-                previews[entry.id] = AppPreview(entry: entry, image: nil, status: .notRunning)
+                previews[entry.id] = AppPreview(
+                    entry: entry,
+                    image: previews[entry.id]?.image,
+                    status: .notRunning
+                )
                 continue
             }
 
@@ -94,7 +102,11 @@ final class PreviewGridViewModel: ObservableObject {
                 let image = try await captureService.capture(window: window)
                 previews[entry.id] = AppPreview(entry: entry, image: image, status: .ready)
             } catch {
-                previews[entry.id] = AppPreview(entry: entry, image: nil, status: .captureFailed)
+                previews[entry.id] = AppPreview(
+                    entry: entry,
+                    image: previews[entry.id]?.image,
+                    status: .captureFailed
+                )
             }
         }
     }

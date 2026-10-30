@@ -30,10 +30,11 @@ struct WorkspacePanelView: View {
                         ),
                         spacing: 18
                     ) {
-                        ForEach(store.entries) { entry in
+                        ForEach(Array(store.entries.enumerated()), id: \.element.id) { index, entry in
                             AppPreviewCard(
                                 entry: entry,
                                 preview: viewModel.previews[entry.id],
+                                shortcutNumber: index + 1,
                                 onTap: {
                                     onClose()
                                     viewModel.activate(entry)
@@ -112,7 +113,7 @@ struct WorkspacePanelView: View {
 
     private var footer: some View {
         HStack {
-            Text("每 2 秒刷新窗口画面")
+            Text("1–6 切换应用")
                 .font(.caption)
                 .foregroundStyle(.white.opacity(0.45))
             Spacer()
