@@ -35,6 +35,7 @@
 		A10000010000000000000014 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A30000010000000000000004 /* ApplicationServices.framework */; };
 		A10000010000000000000015 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A30000010000000000000005 /* CoreGraphics.framework */; };
 		A10000010000000000000016 /* AppDeck.app in Products */ = {isa = PBXBuildFile; fileRef = A20000020000000000000001 /* AppDeck.app */; };
+		A10000010000000000000019 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000019 /* AppIcon.icns */; };
 		B10000010000000000000001 /* AppGroupStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000010000000000000001 /* AppGroupStoreTests.swift */; };
 		B10000010000000000000002 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A30000010000000000000006 /* XCTest.framework */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,7 @@
 		A20000010000000000000010 /* WorkspacePanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacePanelView.swift; sourceTree = "<group>"; };
 		A20000010000000000000017 /* EdgeLauncherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeLauncherController.swift; sourceTree = "<group>"; };
 		A20000010000000000000011 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A20000010000000000000019 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
 		A20000020000000000000001 /* AppDeck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppDeck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A30000010000000000000001 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		A30000010000000000000002 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -112,7 +114,7 @@
 		A50000010000000000000004 /* Services */ = {isa = PBXGroup; children = (A20000010000000000000004, A20000010000000000000005, A20000010000000000000006, A20000010000000000000007, A20000010000000000000008, A20000010000000000000009, A2000001000000000000000A); path = Services; sourceTree = "<group>"; };
 		A50000010000000000000005 /* Views */ = {isa = PBXGroup; children = (A2000001000000000000000D, A2000001000000000000000E, A2000001000000000000000F, A20000010000000000000010); path = Views; sourceTree = "<group>"; };
 		A50000010000000000000006 /* Windows */ = {isa = PBXGroup; children = (A2000001000000000000000B, A2000001000000000000000C, A20000010000000000000017); path = Windows; sourceTree = "<group>"; };
-		A50000010000000000000007 /* Resources */ = {isa = PBXGroup; children = (A20000010000000000000011); path = Resources; sourceTree = "<group>"; };
+		A50000010000000000000007 /* Resources */ = {isa = PBXGroup; children = (A20000010000000000000011, A20000010000000000000019); path = Resources; sourceTree = "<group>"; };
 		A50000010000000000000008 /* Products */ = {isa = PBXGroup; children = (A20000020000000000000001, B20000020000000000000001); name = Products; sourceTree = "<group>"; };
 		B50000010000000000000001 /* AppDeckTests */ = {isa = PBXGroup; children = (B20000010000000000000001); path = AppDeckTests; sourceTree = SOURCE_ROOT; };
 /* End PBXGroup section */
@@ -167,7 +169,7 @@
 		A40000010000000000000003 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
-			files = ();
+			files = (A10000010000000000000019 /* AppIcon.icns in Resources */);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		B40000010000000000000003 /* Test Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };

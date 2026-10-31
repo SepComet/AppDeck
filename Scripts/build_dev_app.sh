@@ -8,7 +8,7 @@ app_bundle="$build_root/AppDeck.app"
 executable_path="$app_bundle/Contents/MacOS/AppDeck"
 
 rm -rf "$app_bundle"
-mkdir -p "$(dirname "$executable_path")"
+mkdir -p "$(dirname "$executable_path")" "$app_bundle/Contents/Resources"
 source_files=()
 while IFS= read -r source_file; do
     source_files+=("$source_file")
@@ -23,6 +23,7 @@ swiftc \
     -o "$executable_path"
 
 cp "$workspace_root/AppDeck/Resources/Info.plist" "$app_bundle/Contents/Info.plist"
+cp "$workspace_root/AppDeck/Resources/AppIcon.icns" "$app_bundle/Contents/Resources/AppIcon.icns"
 /usr/libexec/PlistBuddy -c "Set :CFBundleExecutable AppDeck" "$app_bundle/Contents/Info.plist"
 /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier com.wmx.AppDeck" "$app_bundle/Contents/Info.plist"
 signing_identity="${APPDECK_CODESIGN_IDENTITY:-AppDeck Local Development}"
