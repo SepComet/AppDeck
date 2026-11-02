@@ -115,6 +115,20 @@ final class AppGroupStore: ObservableObject {
         save()
     }
 
+    func move(entryID: String, before targetID: String) {
+        guard entryID != targetID,
+              let sourceIndex = entries.firstIndex(where: { $0.id == entryID }),
+              let targetIndex = entries.firstIndex(where: { $0.id == targetID }) else {
+            return
+        }
+
+        let moving = entries.remove(at: sourceIndex)
+        let adjustedTargetIndex = targetIndex > sourceIndex ? targetIndex - 1 : targetIndex
+        entries.insert(moving, at: adjustedTargetIndex)
+        normalizeOrder()
+        save()
+    }
+
     func reload() {
         load()
     }

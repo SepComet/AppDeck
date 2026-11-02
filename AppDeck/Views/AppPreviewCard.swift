@@ -5,6 +5,7 @@ struct AppPreviewCard: View {
     let entry: AppEntry
     let preview: AppPreview?
     let shortcutNumber: Int
+    let isDragging: Bool
     let onTap: () -> Void
 
     @State private var isHovered = false
@@ -52,6 +53,7 @@ struct AppPreviewCard: View {
                 RoundedRectangle(cornerRadius: 18, style: .continuous)
                     .stroke(.white.opacity(isHovered ? 0.3 : 0.12), lineWidth: 1)
             }
+            .opacity(isDragging ? 0.42 : 1)
             .scaleEffect(isHovered ? 1.015 : 1)
             .animation(.easeOut(duration: 0.16), value: isHovered)
         }

@@ -113,6 +113,36 @@ final class AppGroupStoreTests: XCTestCase {
         XCTAssertEqual(store.layout, .six)
     }
 
+    func testMovingEntryBeforeAnotherEntryUpdatesShortcutOrder() throws {
+        let root = FileManager.default.temporaryDirectory
+            .appendingPathComponent("AppDeckTests-\(UUID().uuidString)", isDirectory: true)
+        defer { try? FileManager.default.removeItem(at: root) }
+
+        let store = AppGroupStore(fileURL: root.appendingPathComponent("apps.json"))
+        for index in 0..<3 {
+            try store.addApplication(
+                bundleIdentifier: "com.example.DragTestApp\(index)",
+                displayName: "Drag Test \(index)",
+                appPath: "/Applications/Drag Test \(index).app"
+            )
+        }
+
+        store.move(entryID: "com.example.DragTestApp2", before: "com.example.DragTestApp0")
+
+        XCTAssertEqual(
+            store.entries.map(\.bundleIdentifier),
+            [
+                "com.example.DragTestApp2",
+                "com.example.DragTestApp0",
+                "com.example.DragTestApp1"
+            ]
+        )
+        XCTAssertEqual(store.entries.map(\.sortIndex), [0, 1, 2])
+
+        let reloadedStore = AppGroupStore(fileURL: root.appendingPathComponent("apps.json"))
+        XCTAssertEqual(reloadedStore.entries, store.entries)
+    }
+
     private func makeApplication(
         in root: URL,
         bundleIdentifier: String,

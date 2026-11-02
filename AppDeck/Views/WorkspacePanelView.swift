@@ -1,4 +1,6 @@
+import AppKit
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct WorkspacePanelView: View {
     @ObservedObject var store: AppGroupStore
@@ -7,13 +9,21 @@ struct WorkspacePanelView: View {
     let onClose: () -> Void
 
     @State private var isSettingsPresented = false
+    @State private var draggedEntryID: String?
+
+    private enum Layout {
+        static let topInset: CGFloat = 44
+        static let horizontalInset: CGFloat = 52
+        static let bottomInset: CGFloat = 28
+        static let cardSpacing: CGFloat = 18
+    }
 
     var body: some View {
         ZStack {
             Color.black.opacity(0.86)
                 .ignoresSafeArea()
 
-            VStack(spacing: 22) {
+            VStack(spacing: Layout.cardSpacing) {
                 header
 
                 if !permissions.screenRecordingGranted || !permissions.accessibilityGranted {
@@ -23,31 +33,51 @@ struct WorkspacePanelView: View {
                 if store.entries.isEmpty {
                     emptyState
                 } else {
-                    LazyVGrid(
-                        columns: Array(
-                            repeating: GridItem(.flexible(), spacing: 18),
-                            count: store.layout.columns
-                        ),
-                        spacing: 18
-                    ) {
+                    GeometryReader { geometry in
+                        LazyVGrid(
+                            columns: Array(
+                                repeating: GridItem(.flexible(), spacing: Layout.cardSpacing),
+                                count: store.layout.columns
+                            ),
+                            spacing: Layout.cardSpacing
+                        ) {
                         ForEach(Array(store.entries.enumerated()), id: \.element.id) { index, entry in
                             AppPreviewCard(
                                 entry: entry,
                                 preview: viewModel.previews[entry.id],
                                 shortcutNumber: index + 1,
+                                isDragging: draggedEntryID == entry.id,
                                 onTap: {
                                     onClose()
                                     viewModel.activate(entry)
                                 }
                             )
+                            .onDrag {
+                                draggedEntryID = entry.id
+                                return NSItemProvider(object: entry.id as NSString)
+                            }
+                            .onDrop(
+                                of: [.text],
+                                delegate: AppEntryDropDelegate(
+                                    targetID: entry.id,
+                                    draggedEntryID: $draggedEntryID,
+                                    moveEntry: { sourceID, destinationID in
+                                        store.move(entryID: sourceID, before: destinationID)
+                                    }
+                                )
+                            )
                         }
+                        }
+                        .frame(width: gridWidth(for: geometry.size))
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
-                    .frame(maxWidth: 1120)
                 }
 
                 footer
             }
-            .padding(36)
+            .padding(.top, Layout.topInset)
+            .padding(.horizontal, Layout.horizontalInset)
+            .padding(.bottom, Layout.bottomInset)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .sheet(isPresented: $isSettingsPresented) {
@@ -92,7 +122,7 @@ struct WorkspacePanelView: View {
             .foregroundStyle(.white.opacity(0.78))
             .accessibilityLabel("关闭 AppDeck")
         }
-        .frame(maxWidth: 1120)
+        .frame(maxWidth: .infinity)
     }
 
     private var emptyState: some View {
@@ -121,6 +151,32 @@ struct WorkspacePanelView: View {
                 .font(.caption)
                 .foregroundStyle(.white.opacity(0.45))
         }
-        .frame(maxWidth: 1120)
+        .frame(maxWidth: .infinity)
+    }
+
+    private func gridWidth(for availableSize: CGSize) -> CGFloat {
+        let aspectRatio = CGFloat(store.layout.columns) * 1.6 / CGFloat(store.layout.rows)
+        return min(availableSize.width, availableSize.height * aspectRatio)
+    }
+}
+
+private struct AppEntryDropDelegate: DropDelegate {
+    let targetID: String
+    @Binding var draggedEntryID: String?
+    let moveEntry: (String, String) -> Void
+
+    func dropEntered(info: DropInfo) {
+        guard let draggedEntryID,
+              draggedEntryID != targetID else { return }
+        moveEntry(draggedEntryID, targetID)
+    }
+
+    func dropUpdated(info: DropInfo) -> DropProposal? {
+        DropProposal(operation: .move)
+    }
+
+    func performDrop(info: DropInfo) -> Bool {
+        draggedEntryID = nil
+        return true
     }
 }
