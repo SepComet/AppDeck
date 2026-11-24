@@ -59,8 +59,8 @@ final class WorkspacePanelController {
     }
 
     private func activateShortcut(_ number: Int) {
-        guard store.entries.indices.contains(number - 1) else { return }
-        let entry = store.entries[number - 1]
+        guard viewModel.visibleEntries.indices.contains(number - 1) else { return }
+        let entry = viewModel.visibleEntries[number - 1]
         hide()
         viewModel.activate(entry)
     }

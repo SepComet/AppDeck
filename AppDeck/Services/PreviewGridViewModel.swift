@@ -6,9 +6,11 @@ import ScreenCaptureKit
 @MainActor
 final class PreviewGridViewModel: ObservableObject {
     @Published private(set) var previews: [String: AppPreview] = [:]
+    @Published private(set) var visibleEntries: [AppEntry] = []
 
     private let store: AppGroupStore
     private let permissions: PermissionManager
+    private let runningAppDiscovery = RunningAppDiscovery()
     private let windowDiscovery = WindowDiscovery()
     private let captureService = WindowCaptureService()
     private let activationService = WindowActivationService()
@@ -38,6 +40,8 @@ final class PreviewGridViewModel: ObservableObject {
     func stop() {
         refreshTask?.cancel()
         refreshTask = nil
+        visibleEntries = []
+        windows = [:]
     }
 
     func refreshNow() {
@@ -47,24 +51,31 @@ final class PreviewGridViewModel: ObservableObject {
     }
 
     func activate(_ entry: AppEntry) {
+        let previewWindow = windows[entry.id]
         stop()
         activationService.activate(
             entry: entry,
-            previewWindow: windows[entry.id],
+            previewWindow: previewWindow,
             accessibilityGranted: permissions.accessibilityGranted
         )
     }
 
     private func refreshOnce() async {
         let entries = store.entries
-        guard !entries.isEmpty else {
+        visibleEntries = entries.filter { entry in
+            runningAppDiscovery.application(for: entry.bundleIdentifier) != nil
+        }
+
+        guard !visibleEntries.isEmpty else {
             previews = [:]
             windows = [:]
             return
         }
 
+        let runningEntries = visibleEntries
+
         guard permissions.screenRecordingGranted else {
-            previews = Dictionary(uniqueKeysWithValues: entries.map {
+            previews = Dictionary(uniqueKeysWithValues: runningEntries.map {
                 ($0.id, AppPreview(
                     entry: $0,
                     image: previews[$0.id]?.image,
@@ -74,20 +85,20 @@ final class PreviewGridViewModel: ObservableObject {
             return
         }
 
-        previews = Dictionary(uniqueKeysWithValues: entries.map {
+        previews = Dictionary(uniqueKeysWithValues: runningEntries.map {
             ($0.id, AppPreview(entry: $0, image: previews[$0.id]?.image, status: .loading))
         })
 
         do {
-            windows = try await windowDiscovery.representativeWindows(for: entries)
+            windows = try await windowDiscovery.representativeWindows(for: runningEntries)
         } catch {
-            previews = Dictionary(uniqueKeysWithValues: entries.map {
+            previews = Dictionary(uniqueKeysWithValues: runningEntries.map {
                 ($0.id, AppPreview(entry: $0, image: previews[$0.id]?.image, status: .unavailable))
             })
             return
         }
 
-        for entry in entries {
+        for entry in runningEntries {
             guard !Task.isCancelled else { return }
             guard let window = windows[entry.id] else {
                 previews[entry.id] = AppPreview(

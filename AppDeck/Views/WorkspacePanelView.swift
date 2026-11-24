@@ -32,6 +32,8 @@ struct WorkspacePanelView: View {
 
                 if store.entries.isEmpty {
                     emptyState
+                } else if viewModel.visibleEntries.isEmpty {
+                    noRunningAppsState
                 } else {
                     GeometryReader { geometry in
                         LazyVGrid(
@@ -41,7 +43,7 @@ struct WorkspacePanelView: View {
                             ),
                             spacing: Layout.cardSpacing
                         ) {
-                        ForEach(Array(store.entries.enumerated()), id: \.element.id) { index, entry in
+                        ForEach(Array(viewModel.visibleEntries.enumerated()), id: \.element.id) { index, entry in
                             AppPreviewCard(
                                 entry: entry,
                                 preview: viewModel.previews[entry.id],
@@ -137,6 +139,20 @@ struct WorkspacePanelView: View {
                 .foregroundStyle(.white.opacity(0.6))
             Button("打开设置") { isSettingsPresented = true }
                 .buttonStyle(.borderedProminent)
+        }
+        .frame(maxHeight: .infinity)
+    }
+
+    private var noRunningAppsState: some View {
+        VStack(spacing: 14) {
+            Image(systemName: "moon.zzz")
+                .font(.system(size: 46))
+                .foregroundStyle(.white.opacity(0.55))
+            Text("没有正在运行的锁定应用")
+                .font(.title3.weight(.semibold))
+                .foregroundStyle(.white)
+            Text("启动已加入白名单的应用后，它会自动重新显示。")
+                .foregroundStyle(.white.opacity(0.6))
         }
         .frame(maxHeight: .infinity)
     }
